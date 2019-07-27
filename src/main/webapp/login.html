@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>User Login Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style>
+
+        /* Center the loader */
+        #loader {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            z-index: 1;
+            width: 150px;
+            height: 150px;
+            margin: -75px 0 0 -75px;
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid forestgreen;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+            display: none;
+        }
+
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+    </style>
+</head>
+<body>
+
+<form id="login_form" class="container" action="/UserDetailsServlet" method="post">
+    <br/>
+    <br/>
+    <h2>LOGIN PORTAL FOR USERS</h2>
+    <br/>
+    <br/>
+    <div class="form-horizontal">
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="uid">UserId - </label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" id="uid" name="uid" placeholder="Enter user id ...">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-sm-2" for="upass">Password - </label>
+            <div class="col-sm-8">
+                <input type="password" class="form-control" id="upass" name="upass" placeholder="Enter password ...">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button id="logsubmit" type="submit" class="btn btn-success">Login</button>
+                <a href="/index.html" class="btn btn-success" style="margin-left: 1%">Back</a>
+            </div>
+        </div>
+
+    </div>
+</form>
+
+<div id="loader"></div>
+
+<script type="text/javascript" src="scripts/usrlogin.js"></script>
+
+</body>
+</html>
