@@ -38,6 +38,7 @@
       
       <mapping class="org.scp.app.pojos.UserDetails"/>
       <mapping class="org.scp.app.pojos.ApprovalPending"/>
+      <mapping class="org.scp.app.pojos.HostDetails"/>
       
    </session-factory>
 </hibernate-configuration>
