@@ -14,12 +14,20 @@
 package org.scp.app.pojos;
 
 import java.io.Serializable;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Column;
 import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+
+@ NamedQueries ({
+
+        @ NamedQuery ( name = "checkifhostesists", query = "from HostDetails hd where hd.h_name=:hname" )
+
+})
 
 @ Entity
 @ Table ( name = "REMOTE_HOST_DETAILS" )
