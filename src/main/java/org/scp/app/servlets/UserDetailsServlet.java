@@ -53,7 +53,7 @@ public final class UserDetailsServlet extends HttpServlet
 	     }
 
          @ Override
-	     protected void doPut ( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+	     protected synchronized void doPut ( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
 
                     response.setContentType( "text/json" );
 	                response.setCharacterEncoding( "UTF-8" );
@@ -84,7 +84,7 @@ public final class UserDetailsServlet extends HttpServlet
          }
 
          @ Override
-         protected void doPost ( HttpServletRequest request, HttpServletResponse response )throws ServletException, IOException {
+         protected synchronized void doPost ( HttpServletRequest request, HttpServletResponse response )throws ServletException, IOException {
 
                     request.setAttribute( "response_body", (new DbopUsrDet ()).retrieve( request.getParameter( "uid" ), request.getParameter( "upass" ) ) );
                     getServletContext().getRequestDispatcher( "/results.jsp" ).forward( request, response );
@@ -92,7 +92,7 @@ public final class UserDetailsServlet extends HttpServlet
          }
 
          @ Override
-         protected void doDelete ( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+         protected synchronized void doDelete ( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
 
                     response.setContentType( "text/json" );
                     response.setCharacterEncoding( "UTF-8" );
