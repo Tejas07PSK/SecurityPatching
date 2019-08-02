@@ -48,7 +48,7 @@ public class HostDetails implements Serializable
         public HostDetails () {
 
                 h_slno = 0L; h_name = ""; h_type = "";
-                h_loc = ""; h_loc = ""; h_patch = "";
+                h_loc = ""; h_patch = "";
 
         }
 
