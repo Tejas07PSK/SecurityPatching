@@ -14,19 +14,12 @@
 package org.scp.app.pojos;
 
 import java.io.Serializable;
-import java.util.Random;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Column;
-import javax.persistence.FetchType;
 import javax.persistence.Table;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.OneToOne;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 
 @ Entity
 @ Table ( name = "REMOTE_HOST_DETAILS" )
