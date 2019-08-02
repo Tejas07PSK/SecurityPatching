@@ -45,6 +45,13 @@ public class HostDetails implements Serializable
         @ Column ( name = "HOST_PATCH", length = 100, nullable = false )
         private String h_patch;
 
+        public HostDetails () {
+
+                h_slno = 0L; h_name = ""; h_type = "";
+                h_loc = ""; h_loc = ""; h_patch = "";
+
+        }
+
         public long getH_slno () { return ( h_slno ); }
 
         public void setH_slno ( long h_slno ) { this.h_slno = h_slno; }
