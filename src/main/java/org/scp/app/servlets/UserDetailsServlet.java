@@ -30,6 +30,8 @@ import java.io.InputStreamReader;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.scp.app.mailing.Email;
+import java.io.File;
 
 @ WebServlet ( description = "Core Servlet For Begining all Operations", urlPatterns = { "/UserDetailsServlet" } )
 public final class UserDetailsServlet extends HttpServlet
@@ -42,6 +44,7 @@ public final class UserDetailsServlet extends HttpServlet
          @ Override
          public void init () {
 
+             Email.buildEmail( (getServletContext().getRealPath("/WEB-INF")) + File.separator + "Credentials" );
              try{
 
 	                System.setProperty( "java.net.preferIPv4Stack", "true" );
@@ -75,6 +78,19 @@ public final class UserDetailsServlet extends HttpServlet
                                                    ((String)(jo.get( "USER_INPUT_ROLE" ))).toUpperCase(),
                                                    (String)(jo.get( "USER_INPUT_PASSWORD" )),
                                                    (String)(jo.get( "USER_INPUT_SECKEY" )) );
+                            jo = ((JSONObject)((new JSONParser ()).parse( result )));
+                            if ( (jo.get( "STATUS_CODE" )).equals( "1" ) ) {
+
+                                jo = (JSONObject)(jo.get("RESPONSE"));
+                                Email.sendUserRegEmail( 1, ((String)(jo.get( "USER_ID" ))),
+                                                              ((String)(jo.get( "ROLE" ))),
+                                                              (String)(jo.get( "FIRST_NAME" )),
+                                                              (String)(jo.get( "LAST_NAME" )),
+                                                              ((String)(jo.get( "EMAIL_ID" ))),
+                                                              (String)(jo.get( "MOB_NO" )),
+                                                              (String)(jo.get( "PASSWORD" )) );
+
+                            }
 
                         } catch ( ParseException pe ) { System.out.println( pe ); result = "{\"STATUS\":\"Error!!\",\"RESPONSE\":\"Json Parse Error!!\"}"; }
                     out.print( result );
@@ -107,7 +123,10 @@ public final class UserDetailsServlet extends HttpServlet
                     try {
 
                             JSONObject jo = (JSONObject)((new JSONParser ()).parse( req.toString() ));
-                            result = (remv).remove( Long.parseLong((String)(jo.get( "PEN_USR_SLNO" ))) );
+                            String to_eml = (String)(jo.get( "PEN_USR_EML" ));
+                            result = (remv).remove( Long.parseLong( (String)(jo.get( "PEN_USR_SLNO" )) ) );
+                            jo = ((JSONObject)((new JSONParser ()).parse( result )));
+                            if ( (jo.get( "STATUS_CODE" )).equals( "1" ) ) { Email.sendUserRegEmail( 2, to_eml ); }
 
                     } catch ( ParseException pe ) { System.out.println( pe ); result = "{\"STATUS\":\"Error!!\",\"RESPONSE\":\"Json Parse Error!!\"}"; }
                     out.print( result );
