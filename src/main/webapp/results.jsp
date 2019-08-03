@@ -54,7 +54,7 @@
                 <hr>
             <% } else {
                 jo = (JSONObject)(jo.get("RESPONSE"));
-                jarr = (JSONArray) (new JSONParser()).parse((String)(jo.get("PEND_LIST")));
+                jarr = (JSONArray) (new JSONParser()).parse((String)(jo.get("LIST")));
                 if (((String)(jo.get("PEND_STAT"))).equals("1")) {
             %>
                     <h2 style="color: midnightblue">You registration is yet to be approved.</h2>
@@ -71,7 +71,7 @@
                     <br/>
                     <br/>
                     <hr>
-                    <% if (jarr.size() > 0) { %>
+                    <% if (((String)(jo.get("USER_ROLE"))).equals("MANAGER")) { %>
                             <h2 style="text-align: left">Pending User Registration Approvals</h2>
                             <table class="table table-hover">
                                 <thead>
@@ -80,6 +80,7 @@
                                         <th>User Id</th>
                                         <th>Firstname</th>
                                         <th>Lastname</th>
+                                        <th>Email</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -89,13 +90,98 @@
                                             <td><% out.print((String)(((JSONObject)(jarr.get(i))).get("PUSER_ID"))); %></td>
                                             <td><% out.print((String)(((JSONObject)(jarr.get(i))).get("PUSER_FNAME"))); %></td>
                                             <td><% out.print((String)(((JSONObject)(jarr.get(i))).get("PUSER_LNAME"))); %></td>
+                                            <td><% out.print((String)(((JSONObject)(jarr.get(i))).get("PUSER_EMAIL"))); %></td>
                                             <td><button type="submit" class="btn btn-danger apv">Approve</button></td>
                                         </tr>
                                     <% } %>
                                 </tbody>
                             </table>
+                    <% }  else if (((String)(jo.get("USER_ROLE"))).equals("DEVELOPER")) { %>
+                            <h2 style="text-align: left">Patching List</h2>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Hostname</th>
+                                        <th>Patch</th>
+                                        <th>Type</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for (int i = 0 ; i < jarr.size() ; i++) { %>
+                                        <tr>
+                                            <td><% out.print((String)(((JSONObject)(jarr.get(i))).get("HOST_NAME"))); %></td>
+                                            <td><% out.print((String)(((JSONObject)(jarr.get(i))).get("HOST_PATCH"))); %></td>
+                                            <td><% out.print((String)(((JSONObject)(jarr.get(i))).get("HOST_TYP"))); %></td>
+                                            <td><button type="submit" class="btn btn-danger pat">Run Patch</button></td>
+                                        </tr>
+                                    <% } %>
+                                </tbody>
+                            </table>
+                    <% } else { %>
+                            <div class="form-inline">
+
+                                    <div class="form-group">
+                                        <label for="hname">HOSTNAME : </label>
+                                        <input type="text" class="form-control" id="hname" placeholder="Enter Hostname ...">
+                                    </div>
+
+                                    <div class="form-group" style="margin-left: 1%">
+                                        <label for="pname"> PATCHNAME : </label>
+                                        <input type="text" class="form-control" id="pname" placeholder="Enter Patch ...">
+                                    </div>
+
+                                    <div class="form-group" style="margin-left: 1%">
+                                        <label for="htyp">Type : </label>
+                                        <select class="form-control" id="htyp">
+                                            <option value="DEV">DEV</option>
+                                            <option value="UAT">UAT</option>
+                                            <option value="QA">QA</option>
+                                            <option value="PROD">PROD</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group" style="margin-left: 1%">
+                                        <label for="hloc">Region - </label>
+                                        <select class="form-control" id="hloc">
+                                            <option value="NAM">NAM</option>
+                                            <option value="EMEA">EMEA</option>
+                                            <option value="APAC">APAC</option>
+                                            <option value="LATAM">LATAM</option>
+                                        </select>
+                                    </div>
+
+                                    <button id="submit" type="submit" class="btn btn-warning" style="margin-left: 1%">Add</button>
+
+                            </div>
+                            <br/>
+                            <hr>
+                            <br/>
+                            <h2 style="text-align: left">Servers List</h2>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Sl. No.</th>
+                                        <th>Hostname</th>
+                                        <th>Patch</th>
+                                        <th>Type</th>
+                                        <th>Location</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for (int i = 0 ; i < jarr.size() ; i++) { %>
+                                        <tr>
+                                            <td><% out.print((String)(((JSONObject)(jarr.get(i))).get("HOST_SLNO"))); %></td>
+                                            <td><% out.print((String)(((JSONObject)(jarr.get(i))).get("HOST_NAME"))); %></td>
+                                            <td><% out.print((String)(((JSONObject)(jarr.get(i))).get("HOST_PATCH"))); %></td>
+                                            <td><% out.print((String)(((JSONObject)(jarr.get(i))).get("HOST_TYP"))); %></td>
+                                            <td><% out.print((String)(((JSONObject)(jarr.get(i))).get("HOST_LOC"))); %></td>
+                                            <td><button type="submit" class="btn btn-danger del">Delete</button></td>
+                                        </tr>
+                                    <% } %>
+                                </tbody>
+                            </table>
                     <% } %>
-               <% } %>
+                <% } %>
             <% } %>
             <br/>
             <br/>
