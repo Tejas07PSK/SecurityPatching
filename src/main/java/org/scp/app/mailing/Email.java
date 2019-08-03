@@ -213,7 +213,7 @@ public final class Email implements Serializable
        /*public static void main (String args[]){
 
            try{
-               Email.writetobinencrypted("team.eworld97@gmail.com", "e_wrld9977#", "e-world-188519", "529792984638-u177obukg7ne2tvbilbng8rg8h7ju2l0.apps.googleusercontent.com", "eP3h8TXiuHsR6HgdWYzCz0Bo", "1/_9k577AxIqgpU5eX3dtL97qJxOL_g0s-BOChW0AKY18");
+               Email.writetobinencrypted();
                Email.readfrombinencrypted();
            }catch (Exception e) {e.printStackTrace();}
 
