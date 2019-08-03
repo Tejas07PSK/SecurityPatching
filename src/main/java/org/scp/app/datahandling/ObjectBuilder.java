@@ -14,6 +14,7 @@
 package org.scp.app.datahandling;
 
 import org.scp.app.pojos.ApprovalPending;
+import org.scp.app.pojos.HostDetails;
 import org.scp.app.pojos.UserDetails;
 import java.util.List;
 import org.json.simple.JSONObject;
@@ -38,7 +39,8 @@ public class ObjectBuilder
                     switch ( cls ) {
 
                             case "UserDetails" : oj = new UserDetails (); break;
-                            case "ApprovalPending" : oj = new ApprovalPending(); break;
+                            case "ApprovalPending" : oj = new ApprovalPending (); break;
+                            case "HostDetails" : oj = new HostDetails (); break;
                             default : oj = null; break;
 
                     }
@@ -100,7 +102,7 @@ public class ObjectBuilder
 
                                                                        jsobj.put( "STATUS", "Insertion Failed!!" );
                                                                        jsobj.put( "STATUS_CODE", "-1" );
-                                                                       jsobj.put( "RESPONSE", "Internal Hibernate Exception" );
+                                                                       jsobj.put( "RESPONSE", "Internal Hibernate Exception!!" );
 
                                                                 }
                                                                 break;
@@ -117,7 +119,7 @@ public class ObjectBuilder
                                                                        temp.put( "EMAIL_ID", ((UserDetails)(((List <Object>)(O)).get( 0 ))).getEmail_id() );
                                                                        temp.put( "MOB_NO", ((UserDetails)(((List <Object>)(O)).get( 0 ))).getMob_no() );
                                                                        temp.put( "PASSWORD", ((UserDetails)(((List <Object>)(O)).get( 0 ))).getPass() );
-                                                                       temp.put( "PEND_LIST", (String)(((List <Object>)(O)).get( 1 )) );
+                                                                       temp.put( "LIST", (String)(((List <Object>)(O)).get( 1 )) );
                                                                        temp.put( "PEND_STAT", (String)(((List <Object>)(O)).get( 2 )) );
                                                                        jsobj.put( "RESPONSE", temp );
 
@@ -133,7 +135,7 @@ public class ObjectBuilder
 
                                                                        jsobj.put( "STATUS", "Retrieval Failed!!" );
                                                                        jsobj.put( "STATUS_CODE", "-1" );
-                                                                       jsobj.put( "RESPONSE", "Internal Hibernate Exception" );
+                                                                       jsobj.put( "RESPONSE", "Internal Hibernate Exception!!" );
 
                                                                   }
                                                                   break;
@@ -157,7 +159,7 @@ public class ObjectBuilder
 
                                                                                 jsobj.put( "STATUS", "Removal Failed!!" );
                                                                                 jsobj.put( "STATUS_CODE", "-1" );
-                                                                                jsobj.put( "RESPONSE", "Incorrect UserId Or Password!!" );
+                                                                                jsobj.put( "RESPONSE", "Internal Hibernate Exception!!" );
 
                                                                         }
                                                                         break;
@@ -168,6 +170,57 @@ public class ObjectBuilder
 
                                                   }
                                                   break;
+                        case "HostDetails" : switch ( arr[1] ) {
+
+                                                        case "Insert" : if ( cse == 0 ) {
+
+                                                                                jsobj.put( "STATUS", "Insertion Successful!!" );
+                                                                                jsobj.put( "STATUS_CODE", "1" );
+                                                                                JSONObject temp = new JSONObject ();
+                                                                                temp.put( "HOSTNAME", ((HostDetails)O).getH_name() );
+                                                                                temp.put( "PATCHNAME", ((HostDetails)O).getH_patch() );
+                                                                                temp.put( "HOST_TYPE", ((HostDetails)O).getH_type() );
+                                                                                temp.put( "HOST_LOC", ((HostDetails)O).getH_loc() );
+                                                                                jsobj.put( "RESPONSE", temp );
+
+                                                                        }
+                                                                        if ( cse == -2 ) {
+
+                                                                                jsobj.put( "STATUS", "Insertion Failed!!" );
+                                                                                jsobj.put( "STATUS_CODE", "-1" );
+                                                                                jsobj.put( "RESPONSE", "Hostname already exists!!" );
+
+                                                                        }
+                                                                        if ( cse == -1 ) {
+
+                                                                                jsobj.put( "STATUS", "Insertion Failed!!" );
+                                                                                jsobj.put( "STATUS_CODE", "-1" );
+                                                                                jsobj.put( "RESPONSE", "Internal Hibernate Exception!!" );
+
+                                                                        }
+                                                                        break;
+                                                        case "Delete" : if ( cse == 0 ) {
+
+                                                                                jsobj.put( "STATUS", "Removal Successful!!" );
+                                                                                jsobj.put( "STATUS_CODE", "1" );
+                                                                                jsobj.put( "RESPONSE", "Host Removed!!" );
+
+                                                                        }
+                                                                        if ( cse == -1 ) {
+
+                                                                                jsobj.put( "STATUS", "Removal Failed!!" );
+                                                                                jsobj.put( "STATUS_CODE", "-1" );
+                                                                                jsobj.put( "RESPONSE", "Internal Hibernate Exception!!" );
+
+                                                                        }
+                                                                        break;
+                                                        default : jsobj.put( "STATUS", "ERROR!!" );
+                                                                  jsobj.put( "STATUS_CODE", "-1" );
+                                                                  jsobj.put( "RESPONSE", "Unknown ERROR!!" );
+                                                                  break;
+
+                                             }
+                                             break;
                         default : jsobj.put( "STATUS", "ERROR!!" );
                                   jsobj.put( "STATUS_CODE", "-1" );
                                   jsobj.put( "RESPONSE", "Unknown ERROR!!" );
