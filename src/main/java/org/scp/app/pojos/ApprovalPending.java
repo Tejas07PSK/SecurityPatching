@@ -51,7 +51,8 @@ public class ApprovalPending implements Serializable
 
                 @ JoinColumn ( name = "PUSER_ID", nullable = false, unique = true, referencedColumnName = "USER_ID" ),
                 @ JoinColumn ( name = "PUSER_FIRSTNAME", nullable = false, referencedColumnName = "FIRST_NAME" ),
-                @ JoinColumn ( name = "PUSER_LASTNAME", nullable = false, referencedColumnName = "LAST_NAME" )
+                @ JoinColumn ( name = "PUSER_LASTNAME", nullable = false, referencedColumnName = "LAST_NAME" ),
+                @ JoinColumn ( name = "PUSER_EMAIL_ID", nullable = false, referencedColumnName = "EMAIL_ID" )
 
         } )
         private UserDetails ud;
