@@ -58,40 +58,40 @@ public final class DbopApvPend extends Logic implements Serializable
 
         protected synchronized String retrieveAll () {
 
-            List <Object []> lst = new ArrayList <> (); Session s = null; String str = "[]";
-            JSONArray ja = new JSONArray ();
-            try {
+                List <Object []> lst = new ArrayList <> (); Session s = null; String str = "[]";
+                JSONArray ja = new JSONArray ();
+                try {
 
-                    s = sf.openSession(); s.beginTransaction();
-                    Query qry = s.createQuery( "select ap.pn_slno, ap.ud.usr_id, ap.ud.firstname, ap.ud.lastname, ap.ud.email_id from ApprovalPending ap" );
-                    lst = qry.getResultList();
-                    if ( !(lst.isEmpty()) ) {
+                        s = sf.openSession(); s.beginTransaction();
+                        Query qry = s.createQuery( "select ap.pn_slno, ap.ud.usr_id, ap.ud.firstname, ap.ud.lastname, ap.ud.email_id from ApprovalPending ap" );
+                        lst = qry.getResultList();
+                        if ( !(lst.isEmpty()) ) {
 
-                            for ( Object [] arr : lst ) {
+                                for ( Object [] arr : lst ) {
 
-                                    JSONObject tmp = new JSONObject ();
-                                    tmp.put( "PUSER_SLNO", String.valueOf(arr[0]) );
-                                    tmp.put( "PUSER_ID", (String)arr[1] );
-                                    tmp.put( "PUSER_FNAME", (String)arr[2] );
-                                    tmp.put( "PUSER_LNAME", (String)arr[3] );
-                                    tmp.put( "PUSER_EMAIL", (String)arr[4] );
-                                    ja.add( tmp );
+                                        JSONObject tmp = new JSONObject ();
+                                        tmp.put( "PUSER_SLNO", String.valueOf(arr[0]) );
+                                        tmp.put( "PUSER_ID", (String)arr[1] );
+                                        tmp.put( "PUSER_FNAME", (String)arr[2] );
+                                        tmp.put( "PUSER_LNAME", (String)arr[3] );
+                                        tmp.put( "PUSER_EMAIL", (String)arr[4] );
+                                        ja.add( tmp );
 
-                            }
-                            str = ja.toJSONString();
+                                }
+                                str = ja.toJSONString();
 
-                    }
-                    s.getTransaction().commit();
+                        }
+                        s.getTransaction().commit();
 
-            } catch ( Exception e ) {
+                } catch ( Exception e ) {
 
-                    str = null;
-                    System.out.println( "HibernateException Occured!!" + e );
-                    e.printStackTrace();
+                        str = null;
+                        System.out.println( "HibernateException Occured!!" + e );
+                        e.printStackTrace();
 
-            }
-            finally { if ( s != null ) { s.clear(); s.close(); } }
-            return ( str );
+                }
+                finally { if ( s != null ) { s.clear(); s.close(); } }
+                return ( str );
 
         }
 
