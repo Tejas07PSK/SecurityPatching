@@ -13,7 +13,7 @@
       </property>
       
       <property name = "hibernate.connection.url">
-         jdbc:mysql://mysql:3306/SecurityPatching
+         jdbc:mysql://localhost:3306/SecurityPatching
       </property>
       
       <property name = "hibernate.connection.username">
