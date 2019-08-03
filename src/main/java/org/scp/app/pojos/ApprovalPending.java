@@ -57,34 +57,14 @@ public class ApprovalPending implements Serializable
         } )
         private UserDetails ud;
 
-        public ApprovalPending () {
+        public ApprovalPending () { pn_slno = 0L; ud = new UserDetails (); }
 
-                pn_slno = 0L; ud = new UserDetails ();
+        public long getPn_slno () { return ( pn_slno ); }
 
-        }
+        public void setPn_slno ( long pn_slno ) { this.pn_slno = pn_slno; }
 
-        public long getPn_slno () {
+        public UserDetails getUd () { return ( ud ); }
 
-                return ( pn_slno );
-
-        }
-
-        public void setPn_slno ( long pn_slno ) {
-
-                this.pn_slno = pn_slno;
-
-        }
-
-        public UserDetails getUd () {
-
-                return ( ud );
-
-        }
-
-        public void setUd ( UserDetails ud ) {
-
-                this.ud = ud;
-
-        }
+        public void setUd ( UserDetails ud ) { this.ud = ud; }
 
 }
