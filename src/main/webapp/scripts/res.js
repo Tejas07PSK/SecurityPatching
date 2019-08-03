@@ -7,6 +7,7 @@
 $(document).ready(function(){
 
     $.ajaxSetup({
+        "timeout" : 0,
         "beforeSend" : function (xhr)
         {
             xhr.overrideMimeType('application/json');
@@ -28,7 +29,7 @@ $(document).ready(function(){
                 scriptCharset: "UTF-8",
                 type: 'DELETE',
                 traditional: true,
-                timeout: 20000,
+                timeout: 0,
                 dataType: "json",
                 data: JSON.stringify(del_det),
                 beforeSend: function (xhr) {
@@ -83,7 +84,7 @@ $(document).ready(function(){
             scriptCharset: "UTF-8",
             type: 'DELETE',
             traditional: true,
-            timeout: 20000,
+            timeout: 0,
             dataType: "json",
             data: JSON.stringify(del_det),
             beforeSend: function (xhr) {
