@@ -28,7 +28,8 @@ $(document).ready(function(){
         }
     }
 
-    $("button#logsubmit").click(function() {
+    $("form#login_form").on('submit', function(e) {
+        e.preventDefault();
         var cnt = 0;
         if ((/^[A-Z]{2}[0-9]+$/g).test($("input#uid").val())) {
             fieldValidationVisStat($("input#uid"), true);
@@ -43,9 +44,9 @@ $(document).ready(function(){
             fieldValidationVisStat($("input#upass"), false);
         }
         if (cnt === 2){
-            $("form#login_form").css("display","none");
+            $(this).css("display","none");
             $("div#loader").css("display","block");
-            $("form#login_form").submit();
+            $(this).unbind('submit').submit();
         }
     });
 
