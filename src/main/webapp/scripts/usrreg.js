@@ -7,6 +7,7 @@
 $(document).ready(function(){
        
        $.ajaxSetup({
+            "timeout" : 0,
             "beforeSend" : function (xhr)
                            {
                                 xhr.overrideMimeType('application/json');
@@ -106,7 +107,7 @@ $(document).ready(function(){
                    scriptCharset: "UTF-8",
                    type: 'PUT',
                    traditional: true,
-                   timeout: 20000,
+                   timeout: 0,
                    dataType: "json",
                    data: JSON.stringify(reg_dets),
                    beforeSend: function (xhr) {
