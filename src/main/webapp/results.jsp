@@ -96,7 +96,7 @@
                                     <% } %>
                                 </tbody>
                             </table>
-                    <% }  else if (((String)(jo.get("USER_ROLE"))).equals("DEVELOPER")) { %>
+                    <% }  else if (((String)(jo.get("USER_ROLE"))).equals("PATCHADMIN")) { %>
                             <h2 style="text-align: left">Patching List</h2>
                             <table class="table table-hover">
                                 <thead>
