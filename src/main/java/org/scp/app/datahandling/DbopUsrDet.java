@@ -13,7 +13,6 @@
 
 package org.scp.app.datahandling;
 
-import org.scp.app.pojos.ApprovalPending;
 import org.scp.app.pojos.UserDetails;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -47,11 +46,9 @@ public final class DbopUsrDet extends Logic implements Crud, Serializable
                                        if ( (((UserDetails)(O)).getRole()).equals( "MANAGER" ) && !((vals[6]).equals( "123456" )) ) { System.out.println( "err4" ); chk = -5; }
                                        else { s.saveOrUpdate( O ); }
 
-                                   }
-                                   else { System.out.println( "err1" ); chk = -4; }
+                                   } else { System.out.println( "err1" ); chk = -4; }
 
-                             }
-                             else { System.out.println( "err2" ); chk = -3; }
+                             } else { System.out.println( "err2" ); chk = -3; }
 
                         } else { System.out.println( "err3" ); chk = -2; }
                         s.getTransaction().commit();
@@ -92,20 +89,26 @@ public final class DbopUsrDet extends Logic implements Crud, Serializable
 
                             } else {
 
-                                    lst.add( "[]" );
-                                    s = sf.openSession(); s.beginTransaction();
-                                    if ( (s.getNamedQuery( "checkifuserispending" ).setParameter( "ent_uid", vals[0] ).getResultList()).isEmpty() ) {
+                                    resp = (new DbopHostDet ()).retrieveAll();
+                                    chk = ( resp == null ? -1 : 0 );
+                                    if ( chk == 0 ) {
+                                            lst.add(resp);
+                                            s = sf.openSession();
+                                            s.beginTransaction();
+                                            if ((s.getNamedQuery("checkifuserispending").setParameter("ent_uid", vals[0]).getResultList()).isEmpty()) {
 
-                                        lst.add( "" );
+                                                lst.add( "" );
 
-                                    } else { lst.add( "1" ); }
-                                    s.getTransaction().commit();
+                                            } else { lst.add( "1" ); }
+                                        s.getTransaction().commit();
+
+                                    }
 
                             }
 
                         }
 
-                } catch (Exception e) {
+                } catch ( Exception e ) {
 
                         chk = -1;
                         System.out.println( "HibernateException Occured!!" + e );
