@@ -50,7 +50,11 @@ $(document).ready(function(){
             });
     });
 
-    $("button.pat").click(function () { alert("Patching Failure!! Host Unreachable !!"); });
+    $("button.pat").click(function () {
+        alert("Starting patching promt .... \n Hit OK when ready!!");
+        var objShell = new ActiveXObject("WScript.shell");
+        objShell.run('"C:\\Windows\\system32\\cmd.exe"');
+    });
 
     $("button#submit").click(function () {
             var dat = {
