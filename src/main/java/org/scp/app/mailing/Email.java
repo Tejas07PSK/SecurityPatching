@@ -83,7 +83,6 @@ public final class Email implements Serializable
                         props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 	                    props.put( "mail.user", user );
 	                    props.put( "mail.password", pass );
-	                    //java.security.Security.addProvider( new com.sun.net.ssl.internal.ssl.Provider () );
 	                    props.put( "mail.smtp.socketFactory.port", "587" );
 	                    props.put( "mail.smtp.socketFactory.fallback","true" );
 	                    props.put( "mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory" );
