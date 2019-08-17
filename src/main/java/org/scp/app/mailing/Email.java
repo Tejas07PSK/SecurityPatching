@@ -79,11 +79,11 @@ public final class Email implements Serializable
 	                    props.put( "mail.smtp.auth", "true" );
 	                    props.put( "mail.smtp.auth.mechanisms", "XOAUTH2" );
 	                    props.put( "mail.smtp.starttls.required", "true" );
-	                    props.put( "mail.smtp.starttls.enable", "true" );
 	                    props.put( "mail.transport.protocol", "smtp" );
+                        props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 	                    props.put( "mail.user", user );
 	                    props.put( "mail.password", pass );
-	                    java.security.Security.addProvider( new com.sun.net.ssl.internal.ssl.Provider () );
+	                    //java.security.Security.addProvider( new com.sun.net.ssl.internal.ssl.Provider () );
 	                    props.put( "mail.smtp.socketFactory.port", "587" );
 	                    props.put( "mail.smtp.socketFactory.fallback","true" );
 	                    props.put( "mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory" );
@@ -213,8 +213,9 @@ public final class Email implements Serializable
        /*public static void main (String args[]){
 
            try{
-               Email.writetobinencrypted();
-               Email.readfrombinencrypted();
+               //Email.writetobinencrypted();
+               //Email.readfrombinencrypted();
+               //Email.sendUserRegEmail(0, "");
            }catch (Exception e) {e.printStackTrace();}
 
        }*/
